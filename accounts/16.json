@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "pelagic-radio-316318",
+  "private_key_id": "26b90dddc1a12c974730a5abe91f10eb52112351",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCt/S+IMUfJrC2K\nvfmfEBtormC3fGQuf2QJeHD4C3h6jadDd9SAbiWlOefcpU+I1yWAwYg+T1LVjHu5\nYNcfCmOwQYT6dgsAdCIRcizxug7Q5JG9w/9HEyEglMO9wKkMKq+1ygO1WBqMhRpL\ndtRVNPnR0ZCjxeuPOf9LA5OWLtkiZ/OGXzuHE+lVy01A+IaNWWxZVNEtnAZJRjXI\nYOSvqSSKiT6hg336NcjPA9w+61Tv9oDpkWCKmIrYGXgtA8syQEqbw7Ye+3vy0Jqp\nLyeh4H/V3mQQZyU5L/JYL3RpH0QH6MVKifAJTZmKPqLC0fXdujmyFn+G8YNEB5l8\nvZ9ajOAzAgMBAAECggEABltiUbUPPOicD14qkSu6/KOmZ/3VATfpVUk/w2hT4hJr\n4pStwHWFzZgkhxTJJ6RIvAAWNMScL64+1QKbSYiNJOL381i9xSn5Fq8Xwks8gFhh\nlM/k81lZFAIrdrLj2kxy+A7l/Mm3ypuQXuJ8FpLlb8ua38j69tQ1Ji3+xfV3PIEF\nYUBtbMr5SZ17343NX0lfnIUC31VSR7HdByycq78npPx8IuHaUo9jcI+FAcSj4FLE\nZPccxCh8trsEIsYbVkR/cIVc4u2JfzOJRzzUmEnvxOsUHd3BWW248ybzTsuC0y3g\nvGkAl2/X0yRT5qs/LmQ0U0MmORwQlWSltFnVHNKHhQKBgQDXwrtqqSIUqHnw2hSL\nypkOK+fTzDYlln2gRLG36L22/JbYn603OGdBTMde6TVfj8N+Y85Gpprzu+b/IYqD\nWS6pb88LXCgZJlgIKsA7fc9zav+YsICNN3HDydA3nESjykgZyLdOxfDXrtQ7dnQN\nRhttbvP0pdw0Dc0tVtb2VmtFvwKBgQDOcBvpij5e9S/YaliueELdTo4k2PU78h0F\nO6oPSNYA+Hhz3c8XZ4z+FEgwbz83t+eq1IB4bM94uVUuEZhhTmwOAXq+gjSvAFHR\npj8LPUtc1J9JAHE8NBcy5kOa6OJdPX/ADovoXatqkLi2MxEAazXypaghVGkAJ7eN\nWCVCysIKjQKBgQC6Lv8dPk/7dZqsXPPH4Y8L7JVDbf/3lZJYf47APaWgRv1AdyG4\n+gIYFlIgs6tsCBnRcfypeNFTq/zcgiwNxiJ+8c2/ZsnvUeg7O/DgJWOjnFxtfTmh\nIowYQIldw4pzsHVhUpPj9OkspV/c5A2m+q1mVI1NuuZ3QMWh70LWFaLB7wKBgFiM\nT/yxtqUmiHpMy3My1IN24ZO+mBo5dOc8u2pI9Lp/2bLhbqX8XcbSTlCwNy6gLLfi\n5KRDEA8ZeAcFtxXt/H1ZdxvmX9C801uY8qvQg9Xywcwfa3LGaTkE+fSldgtGiNiJ\npMtr+k4Ae6pzZxSF6CMHmYGKYmuVna78IyduLyM1AoGAKQhozBFrH5ILm0+d2ctT\nWE4WxtxDP9ekJbe0tlXBPf+diUBUvXj7Etwhg1t6iO1KUv8DgeBBoDbcFkV9wJqG\nWB1ACXSggJV2dff8c/3BhhGYylY9jcej/hGb5H7ZRg8Jly7fW449ORDaELBDNtWB\nQTLR6/ILcy7xcAYxITPlMq4=\n-----END PRIVATE KEY-----\n",
+  "client_email": "mfc-8-e2t8ercr554jq4v0soodutov@pelagic-radio-316318.iam.gserviceaccount.com",
+  "client_id": "109839431158896874023",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mfc-8-e2t8ercr554jq4v0soodutov%40pelagic-radio-316318.iam.gserviceaccount.com"
+}
