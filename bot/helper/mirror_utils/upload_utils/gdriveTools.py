@@ -99,7 +99,7 @@ class GoogleDriveHelper:
         parsed = urlparse.urlparse(link)
         return parse_qs(parsed.query)['id'][0]
 
-    @retry(wait=wait_exponential(multiplier=2, min=3, max=6), stop=stop_after_attempt(5),
+    @retry(wait=wait_exponential(multiplier=2, min=3, max=6), stop=stop_after_attempt(95),
            retry=retry_if_exception_type(HttpError), before=before_log(LOGGER, logging.DEBUG))
     def _on_upload_progress(self):
         if self.status is not None:
@@ -151,7 +151,7 @@ class GoogleDriveHelper:
         LOGGER.info(f"Switching to {SERVICE_ACCOUNT_INDEX}.json service account")
         self.__service = self.authorize()
         
-    @retry(wait=wait_exponential(multiplier=2, min=3, max=6), stop=stop_after_attempt(5),
+    @retry(wait=wait_exponential(multiplier=2, min=3, max=6), stop=stop_after_attempt(95),
            retry=retry_if_exception_type(HttpError), before=before_log(LOGGER, logging.DEBUG))
     def __set_permission(self, drive_id):
         permissions = {
@@ -163,7 +163,7 @@ class GoogleDriveHelper:
         return self.__service.permissions().create(supportsTeamDrives=True, fileId=drive_id,
                                                    body=permissions).execute()
 
-    @retry(wait=wait_exponential(multiplier=2, min=3, max=6), stop=stop_after_attempt(5),
+    @retry(wait=wait_exponential(multiplier=2, min=3, max=6), stop=stop_after_attempt(95),
            retry=retry_if_exception_type(HttpError), before=before_log(LOGGER, logging.DEBUG))
     def upload_file(self, file_path, file_name, mime_type, parent_id):
         # File body description
@@ -283,7 +283,7 @@ class GoogleDriveHelper:
         LOGGER.info("Deleting downloaded file/folder..")
         return link
 
-    @retry(wait=wait_exponential(multiplier=2, min=3, max=6), stop=stop_after_attempt(5),
+    @retry(wait=wait_exponential(multiplier=2, min=3, max=6), stop=stop_after_attempt(95),
            retry=retry_if_exception_type(HttpError), before=before_log(LOGGER, logging.DEBUG))
     def copyFile(self, file_id, dest_id):
         body = {
@@ -310,13 +310,13 @@ class GoogleDriveHelper:
                 else:
                     raise err
 
-    @retry(wait=wait_exponential(multiplier=2, min=3, max=6), stop=stop_after_attempt(5),
+    @retry(wait=wait_exponential(multiplier=2, min=3, max=6), stop=stop_after_attempt(95),
            retry=retry_if_exception_type(HttpError), before=before_log(LOGGER, logging.DEBUG))
     def getFileMetadata(self,file_id):
         return self.__service.files().get(supportsAllDrives=True, fileId=file_id,
                                               fields="name,id,mimeType,size").execute()
 
-    @retry(wait=wait_exponential(multiplier=2, min=3, max=6), stop=stop_after_attempt(5),
+    @retry(wait=wait_exponential(multiplier=2, min=3, max=6), stop=stop_after_attempt(95),
            retry=retry_if_exception_type(HttpError), before=before_log(LOGGER, logging.DEBUG))
     def getFilesByFolderId(self,folder_id):
         page_token = None
@@ -461,7 +461,7 @@ class GoogleDriveHelper:
             if self.is_cancelled:
                 break
 
-    @retry(wait=wait_exponential(multiplier=2, min=3, max=6), stop=stop_after_attempt(5),
+    @retry(wait=wait_exponential(multiplier=2, min=3, max=6), stop=stop_after_attempt(95),
            retry=retry_if_exception_type(HttpError), before=before_log(LOGGER, logging.DEBUG))
     def create_directory(self, directory_name, parent_id):
         file_metadata = {
