@@ -96,7 +96,7 @@ class GoogleDriveHelper:
             regex = r"https://drive\.google\.com/(drive)?/?u?/?\d?/?(mobile)?/?(file)?(folders)?/?d?/([-\w]+)[?+]?/?(w+)?"
             res = re.search(regex,link)
             if res is None:
-                raise IndexError("GDrive ID not found.")
+                raise IndexError("G-Drive ID not found.")
             return res.group(5)
         parsed = urlparse.urlparse(link)
         return parse_qs(parsed.query)['id'][0]
@@ -117,7 +117,7 @@ class GoogleDriveHelper:
                                      resumable=False)
         file_metadata = {
             'name': file_name,
-            'description': 'Uploaded using Slam Aria Mirror Bot',
+            'description': 'Uploaded using Slam Mirrorbot',
             'mimeType': mime_type,
         }
         if parent_id is not None:
@@ -171,7 +171,7 @@ class GoogleDriveHelper:
         # File body description
         file_metadata = {
             'name': file_name,
-            'description': 'Uploaded by Slam Aria Mirror Bot',
+            'description': 'Uploaded by Slam Mirrorbot',
             'mimeType': mime_type,
         }
         try:
@@ -363,7 +363,7 @@ class GoogleDriveHelper:
         try:
             file_id = self.getIdFromUrl(link)
         except (KeyError,IndexError):
-            msg = "Google drive ID could not be found in the provided link"
+            msg = "Google Drive ID could not be found in the provided link"
             return msg
         msg = ""
         LOGGER.info(f"File ID: {file_id}")
@@ -492,7 +492,7 @@ class GoogleDriveHelper:
         file_id = file.get("id")
         if not IS_TEAM_DRIVE:
             self.__set_permission(file_id)
-        LOGGER.info("Created Google-Drive Folder:\nName: {}\nID: {} ".format(file.get("name"), file_id))
+        LOGGER.info("Created G-Drive Folder:\nName: {}\nID: {} ".format(file.get("name"), file_id))
         return file_id
 
     def upload_dir(self, input_directory, parent_id):
@@ -510,8 +510,9 @@ class GoogleDriveHelper:
                 mime_type = get_mime_type(current_file_name)
                 file_name = current_file_name.split("/")[-1]
                 # current_file_name will have the full path
-                self.upload_file(current_file_name, file_name, mime_type, parent_id)
-                self.total_files += 1
+                if not file_name.endswith(".!qB"):
+                    self.upload_file(current_file_name, file_name, mime_type, parent_id)
+                    self.total_files += 1
                 new_id = parent_id
             if self.is_cancelled:
                 break
@@ -557,9 +558,9 @@ class GoogleDriveHelper:
                     content += f'<b> | <a href="https://telegra.ph/{self.path[nxt_page]}">Next</a></b>'
                     nxt_page += 1
             Telegraph(access_token=telegraph_token).edit_page(path = self.path[prev_page],
-                                 title = 'Slam Aria Mirror Bot Search',
-                                 author_name='Slam Aria Mirror Bot',
-                                 author_url='https://github.com/breakdowns/slam-aria-mirror-bot',
+                                 title = 'Slam Mirrorbot Search',
+                                 author_name='Slam Mirrorbot',
+                                 author_url='https://github.com/breakdowns/slam-mirrorbot',
                                  html_content=content)
         return
 
@@ -642,9 +643,9 @@ class GoogleDriveHelper:
 
             for content in self.telegraph_content :
                 self.path.append(Telegraph(access_token=telegraph_token).create_page(
-                                                        title = 'Slam Aria Mirror Bot Search',
-                                                        author_name='Slam Aria Mirror Bot',
-                                                        author_url='https://github.com/breakdowns/slam-aria-mirror-bot',
+                                                        title = 'Slam Mirrorbot Search',
+                                                        author_name='Slam Mirrorbot',
+                                                        author_url='https://github.com/breakdowns/slam-mirrorbot',
                                                         html_content=content
                                                         )['path'])
 
@@ -652,7 +653,7 @@ class GoogleDriveHelper:
             if self.num_of_path > 1:
                 self.edit_telegraph()
 
-            msg = f"<b>Found {len(response['files'])} results for <i>{fileName}</i></b>"
+            msg = f"<b>Found <code>{len(response['files'])}</code> results for <code>{fileName}</code></b>"
             buttons = button_build.ButtonMaker()   
             buttons.buildbutton("🔎 VIEW", f"https://telegra.ph/{self.path[0]}")
 
@@ -665,7 +666,7 @@ class GoogleDriveHelper:
         try:
             file_id = self.getIdFromUrl(link)
         except (KeyError,IndexError):
-            msg = "Google drive ID could not be found in the provided link"
+            msg = "Google Drive ID could not be found in the provided link"
             return msg
         msg = ""
         LOGGER.info(f"File ID: {file_id}")
@@ -728,8 +729,8 @@ class GoogleDriveHelper:
         try:
             file_id = self.getIdFromUrl(link)
         except (KeyError,IndexError):
-            msg = "Google drive ID could not be found in the provided link"
-            return msg, "", ""
+            msg = "Google Drive ID could not be found in the provided link"
+            return msg, "", "", ""
         LOGGER.info(f"File ID: {file_id}")
         try:
             drive_file = self.__service.files().get(fileId=file_id, fields="id, name, mimeType, size",

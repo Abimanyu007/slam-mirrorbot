@@ -6,6 +6,7 @@ import random
 import string
 
 import aria2p
+import qbittorrentapi as qba
 import telegram.ext as tg
 from dotenv import load_dotenv
 from pyrogram import Client
@@ -65,6 +66,18 @@ aria2 = aria2p.API(
         secret="",
     )
 )
+
+
+def get_client() -> qba.TorrentsAPIMixIn:
+    qb_client = qba.Client(host="localhost", port=8090, username="admin", password="adminadmin")
+    try:
+        qb_client.auth_log_in()
+        qb_client.application.set_preferences({"disk_cache":64, "incomplete_files_ext":True, "max_connec":10000, "max_connec_per_torrent":1000, "async_io_threads":32, "preallocate_all":True, "upnp":True, "dl_limit":-1, "up_limit":-1, "dht":True, "pex":True, "lsd":True, "encryption":0, "queueing_enabled":True, "max_active_downloads":15, "max_active_torrents":50, "dont_count_slow_torrents":True, "bittorrent_protocol":0, "recheck_completed_torrents":True, "enable_multi_connections_from_same_ip":True, "slow_torrent_dl_rate_threshold":100,"slow_torrent_inactive_timer":600})
+        return qb_client
+    except qba.LoginFailed as e:
+        LOGGER.error(str(e))
+        return None
+
 
 DOWNLOAD_DIR = None
 BOT_TOKEN = None
@@ -193,7 +206,7 @@ except KeyError:
 try:
     UPTOBOX_TOKEN = getConfig('UPTOBOX_TOKEN')
 except KeyError:
-    logging.info('UPTOBOX_TOKEN not provided!')
+    logging.warning('UPTOBOX_TOKEN not provided!')
     UPTOBOX_TOKEN = None
 try:
     INDEX_URL = getConfig('INDEX_URL')
@@ -312,6 +325,31 @@ try:
         IGNORE_PENDING_REQUESTS = True
 except KeyError:
     pass
+
+try:
+    BASE_URL = getConfig('BASE_URL_OF_BOT')
+    if len(BASE_URL) == 0:
+        BASE_URL = None
+except KeyError:
+    logging.warning('BASE_URL_OF_BOT not provided!')
+    BASE_URL = None
+
+try:
+    IS_VPS = getConfig('IS_VPS')
+    if IS_VPS.lower() == 'true':
+        IS_VPS = True
+    else:
+        IS_VPS = False
+except KeyError:
+    IS_VPS = False
+
+try:
+    SERVER_PORT = getConfig('SERVER_PORT')
+    if len(SERVER_PORT) == 0:
+        SERVER_PORT = None
+except KeyError:
+    logging.warning('SERVER_PORT not provided!')
+    SERVER_PORT = None
 
 updater = tg.Updater(token=BOT_TOKEN)
 bot = updater.bot
